@@ -27,37 +27,58 @@
     });
 
     async function runDemoSequence() {
-        
         overlayScene.setCameraPosition(25, 25, 27);
         overlayScene.setCameraLookAt(-2, 0, -3);
         overlayScene.setCameraZoom(75);
         await overlayScene.say('// hi! welcome to my portfolio!');
-        await delay(100);
+        await delay(1000);
         await overlayScene.say('// let\'s have some fun');
-        await delay(50);
+        await delay(500);
         overlayScene.setCameraPosition(25, 25, 20);
         overlayScene.setCameraLookAt(-2, 0, -10);
         await overlayScene.say('<MeshSpotLight color={{ 0x7a6e00 }} />')
+        await delay(500);
         primaryScene.setDemoStage(1);
-        await delay(250);
+        await delay(500);
         primaryScene.setCameraZoom(75);
-        await delay(250);
+        await delay(500);
         await overlayScene.say('<MeshTorus rotation={{ x: xRot }} scale={0.1} />');
+        await delay(500);
         primaryScene.setDemoStage(2);
         await delay(1000);
-        await overlayScene.say('<MeshTorus rotation={{ x: xRot }} scale={0.2} />');
+        await overlayScene.say('<MeshTorus rotation={{ y: xRot }} scale={0.2} />');
+        await delay(500);
         primaryScene.setDemoStage(3);
         await delay(1000);
-        await overlayScene.say('// yawn... let\'s take it further...');
+        await overlayScene.say('// yawn... let\'s kick it up a notch...');
         demoSnackbar.open();
     }
 
     async function runFullSequence() {
-        overlayScene.say('// great! let\'s keep going');
+        await overlayScene.say('// great! let\'s keep going');
+        await delay(1000);
+        await overlayScene.say('// check this out');
         await delay(500);
-        overlayScene.say('')
+        primaryScene.setDemoStage(4);
+        await delay(500);
+        primaryScene.setDemoStage(5);
+        await delay(5000);
+        await overlayScene.say('// let\'s get rid of this grid');
+        await delay(500);
+        await overlayScene.say('scene.remove(grid);');
+        await delay(500);
+        primaryScene.setDemoStage(6);
+        await delay(3000);
+        await overlayScene.say('// much better');
+        await delay(1000);
+        await overlayScene.say('// ok... let\'s keep moving');
+        await delay(500);
+        await overlayScene.say('// another trick for you');
+        await delay(1000);
+        primaryScene.setDemoStage(7);
+        await delay(6000);
+        primaryScene.setDemoStage(8);
     }
-
 
     /**
     * @param {any} event
