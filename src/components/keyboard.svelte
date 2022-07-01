@@ -144,5 +144,5 @@ import { createEventDispatcher } from "svelte";
     outlineColor={new THREE.Color('black')} 
     outlineWidth={0.01}
     anchorX={'center'}
-    font={'/CascadiaCodePL.ttf'}
+    font={'/CascadiaCode.ttf'}
 />

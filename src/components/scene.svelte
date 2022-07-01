@@ -132,6 +132,7 @@ import { delay } from './util';
         steps: 1,
         curveSegments: 72
     });
+    
     tubeGeometry.center();
     tubeGeometry.rotateX(Math.PI * -.5);
 </script>
