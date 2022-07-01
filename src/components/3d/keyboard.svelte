@@ -11,7 +11,7 @@ import { createEventDispatcher } from "svelte";
 
     /** @param {string} text */
     export async function beginTyping(text) {
-        return /** @type {Promise<void>} */(new Promise((resolve) => {
+        return /** @type {Promise<void>} */ (new Promise((resolve) => {
             if ($actions)
                 console.log($actions);
 
@@ -33,7 +33,7 @@ import { createEventDispatcher } from "svelte";
                         if ('<>!(){}"#:\''.includes(char)) ignoreModifier = true;
                         pressCharacter(text.slice(index, index + 1));
                         index++;
-                        typeTextCut = text.slice(0, index) + '|';
+                        typeTextCut = text.slice(0, index) + '_';
                     }
                 }, Math.random() * (text.slice(index, index + 1) === ' ' ? 250 : 25));
             }

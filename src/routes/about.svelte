@@ -1,2 +1,2 @@
-<h1>About</h1>
-<p>This is a really cool Svelte Kit demo.</p>
+<p>I create beautiful web-based applications using modern technologies.</p>
+<p>Interactive 3D experiences are my spectialty.</p>

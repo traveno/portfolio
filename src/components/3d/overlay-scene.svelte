@@ -3,17 +3,13 @@ import * as THREE from 'three';
 import {
     AmbientLight,
     DirectionalLight,
-    OrbitControls,
-    PerspectiveCamera,
     OrthographicCamera,
     useThrelte,
-    useFrame,
 } from 'threlte'
 import { spring, tweened } from 'svelte/motion';
 import { cubicOut } from 'svelte/easing';
 import Keyboard from './keyboard.svelte';
 import { createEventDispatcher, onMount } from 'svelte';
-import { writable } from 'svelte/store';
 
     const dispatch = createEventDispatcher();
 

@@ -1,8 +1,103 @@
 <script>
     import Nav from '../components/nav.svelte';
-    import Background from '../components/background.svelte';
+    import Drawer, { AppContent, Content } from '@smui/drawer';
+    import List, { Item, Text } from '@smui/list';
+   
+    let clicked = 'nothing yet';
 </script>
 
-<Nav />
-<Background />
-<slot></slot>
+
+<div class="drawer-container">
+    <div class="drawer">
+        <Drawer>
+            <Content>
+                <List>
+                    <Item
+                        href="/"
+                    >
+                        <Text>front page</Text>
+                    </Item>
+                    <Item
+                        href="/about"
+                    >
+                        <Text>my mission</Text>
+                    </Item>
+                </List>
+            </Content>
+        </Drawer>
+    </div>
+    
+    <AppContent class="app-content">
+        <main class="main-content">
+            <slot></slot>
+            <footer>Copyright 2022 Stephen Fike</footer>
+        </main>
+    </AppContent>
+</div>
+
+<div id="social-icons" style="z-index: 99;">
+    <svg enable-background="new 0 0 512 512" height="64px" id="Layer_1" version="1.1" viewBox="0 0 512 512" width="64px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path clip-rule="evenodd" d="M296.133,354.174c49.885-5.891,102.942-24.029,102.942-110.192   c0-24.49-8.624-44.448-22.67-59.869c2.266-5.89,9.515-28.114-2.734-58.947c0,0-18.139-5.898-60.759,22.669   c-18.139-4.983-38.09-8.163-56.682-8.163c-19.053,0-39.011,3.18-56.697,8.163c-43.082-28.567-61.22-22.669-61.22-22.669   c-12.241,30.833-4.983,53.057-2.718,58.947c-14.061,15.42-22.677,35.379-22.677,59.869c0,86.163,53.057,104.301,102.942,110.192   c-6.344,5.452-12.241,15.873-14.507,30.387c-12.702,5.438-45.808,15.873-65.758-18.592c0,0-11.795-21.31-34.012-22.669   c0,0-22.224-0.453-1.813,13.592c0,0,14.96,6.812,24.943,32.653c0,0,13.6,43.089,76.179,29.48v38.543   c0,5.906-4.53,12.702-15.865,10.89C96.139,438.977,32.2,354.626,32.2,255.77c0-123.807,100.216-224.022,224.03-224.022   c123.347,0,224.023,100.216,223.57,224.022c0,98.856-63.946,182.754-152.828,212.688c-11.342,2.266-15.873-4.53-15.873-10.89   V395.45C311.1,374.577,304.288,360.985,296.133,354.174L296.133,354.174z M512,256.23C512,114.73,397.263,0,256.23,0   C114.73,0,0,114.73,0,256.23C0,397.263,114.73,512,256.23,512C397.263,512,512,397.263,512,256.23L512,256.23z" fill-rule="evenodd"/></g></svg>
+</div>
+   
+  <style>
+    /* These classes are only needed because the
+      drawer is in a container on the page. */
+    .drawer-container {
+        position: fixed;
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+
+    .drawer {
+        position: relative;
+        text-align: center;
+    }
+
+
+   
+    * :global(.app-content) {
+        flex: auto;
+        overflow: auto;
+        position: relative;
+        flex-grow: 1;
+    }
+   
+    .main-content {
+        overflow: auto;
+        padding: 16px;
+        padding-left: 32px;
+        box-sizing: border-box;
+    }
+
+    :global(body) {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+
+    #social-icons {
+        position: fixed;
+        bottom: 15px;
+        left: 15px;
+    }
+
+    #social-icons > svg {
+        width: 64px;
+        height: 64px;
+        cursor: pointer;
+        fill: black;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        #social-icons > svg {
+            fill: white;
+        }
+    }
+
+    footer {
+        margin-top: 16px;
+    }
+</style>
+

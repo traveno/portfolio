@@ -3,9 +3,21 @@
     import { onMount } from 'svelte';
     import Scene from './scene.svelte';
     import OverlayScene from './overlay-scene.svelte';
-    import { delay } from './util';
+    import { delay } from '../util';
     import Snackbar, { Actions, Label } from '@smui/snackbar';
     import Button from '@smui/button';
+
+    
+
+    /**
+    * @type {number}
+    */
+    let containerWidth;
+
+    /**
+    * @type {number}
+    */
+    let containerHeight;
 
 
     /**
@@ -29,8 +41,8 @@
     async function runDemoSequence() {
         overlayScene.setCameraPosition(25, 25, 27);
         overlayScene.setCameraLookAt(-2, 0, -3);
-        overlayScene.setCameraZoom(75);
-        await overlayScene.say('// hi! welcome to my portfolio!');
+        overlayScene.setCameraZoom(50);
+        await overlayScene.say('// welcome to my portfolio!');
         await delay(1000);
         await overlayScene.say('// let\'s have some fun');
         await delay(500);
@@ -40,7 +52,7 @@
         await delay(500);
         primaryScene.setDemoStage(1);
         await delay(500);
-        primaryScene.setCameraZoom(75);
+        primaryScene.setCameraZoom(50);
         await delay(500);
         await overlayScene.say('<MeshTorus rotation={{ x: xRot }} scale={0.1} />');
         await delay(500);
@@ -50,8 +62,8 @@
         await delay(500);
         primaryScene.setDemoStage(3);
         await delay(1000);
-        await overlayScene.say('// yawn... let\'s kick it up a notch...');
-        demoSnackbar.open();
+        //demoSnackbar.open();
+        runFullSequence();
     }
 
     async function runFullSequence() {
@@ -88,41 +100,45 @@
     }
 </script>
 
-<div id="primary-scene">
-    <Canvas >
-        <Scene bind:this={primaryScene} />
-    </Canvas>
+<div class="demo-container" bind:clientWidth={containerWidth} bind:clientHeight={containerHeight}>
+    <div id="primary-scene">
+        <Canvas size={{ width: containerWidth, height: containerWidth * 0.75 }}>
+            <Scene bind:this={primaryScene} />
+        </Canvas>
+    </div>
+    <div id="overlay-scene">
+        <Canvas size={{ width: containerWidth, height: containerWidth * 0.75 }}>
+            <OverlayScene bind:this={overlayScene} on:loaded={runDemoSequence} />
+        </Canvas>
+    </div>
+    <Snackbar variant="stacked" bind:this={demoSnackbar} on:SMUISnackbar:closed={handleClosedSnackbar} timeoutMs={-1}>
+        <Label>Continue this demonstration?</Label>
+        <Actions>
+            <Button>Yes!</Button>
+        </Actions>
+    </Snackbar>
 </div>
 
-<div id="overlay-scene">
-    <Canvas>
-        <OverlayScene bind:this={overlayScene} on:loaded={runDemoSequence} />
-    </Canvas>
-</div> 
 
-<Snackbar variant="stacked" bind:this={demoSnackbar} on:SMUISnackbar:closed={handleClosedSnackbar} timeoutMs={-1}>
-    <Label>Continue this demonstration?</Label>
-    <Actions>
-        <Button>Yes!</Button>
-    </Actions>
-</Snackbar>
 
-<style>
-    #primary-scene {
-        position: absolute;
-        z-index: -2;
+<style type="text/scss">
+    @use 'smui-theme';
+    @use '@material/elevation/mdc-elevation';
+
+    .demo-container {
         width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
+        max-width: 1200px;
+        display: grid;
+        border-radius: 50px;
+        overflow: hidden;
+    }
+
+
+    #primary-scene {
+        grid-area: 1 / 1;
     }
 
     #overlay-scene {
-        position: absolute;
-        z-index: -1;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
+        grid-area: 1 / 1;
     }
 </style> 

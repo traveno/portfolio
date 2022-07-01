@@ -7,12 +7,12 @@ import {
     useThrelte,
     useFrame,
     Mesh,
-Group,
+    Group,
 } from 'threlte'
 import { spring, tweened } from 'svelte/motion';
 import { cubicOut, linear } from 'svelte/easing';
 import { onMount } from 'svelte';
-import { delay } from './util';
+import { delay } from '../util';
 
     const { scene } = useThrelte();
 
