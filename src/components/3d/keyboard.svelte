@@ -2,7 +2,6 @@
 import { useGltfAnimations } from "threlte/extras";
 import * as THREE from 'three';
 import { GLTF, Text } from "threlte";
-import { writable } from "svelte/store";
 import { createEventDispatcher } from "svelte";
 
     const dispatch = createEventDispatcher();

@@ -16,7 +16,7 @@ import { delay } from '../util';
 
     const { scene } = useThrelte();
 
-    scene.background = new THREE.Color( 0x000000 );
+    scene.background = new THREE.Color( 0x005599 );
     let gridHelper = new THREE.GridHelper(100, 50, 0x555555, 0x222222);
     scene.add(gridHelper);
 

@@ -3,7 +3,6 @@ import { onMount } from 'svelte';
 
 import { Canvas } from 'threlte';
 import Scene from './demo-interactive-scene.svelte';
-import Slider from '@smui/slider';
 
     /**
     * @type {number}
@@ -31,15 +30,25 @@ import Slider from '@smui/slider';
         </Canvas>
     </div>
     <div id="demo-controls" width={ containerWidth * 0.3 }>
-        <div style="padding: 15px;">
-            <h2>ANIMATION SPEED</h2>
+        <div class="p-8">
+            <!-- <h2>ANIMATION SPEED</h2>
             <Slider bind:value={animSpeed} min={0} max={1} step={0.001} />
 
             <h2>CAMERA ZOOM</h2>
             <Slider bind:value={cameraZoom} min={0} max={1} step={0.001} />
 
             <h2>CYLINDER LENGTH</h2>
-            <Slider bind:value={cylinderLength} min={0.01} max={1} step={0.001} />
+            <Slider bind:value={cylinderLength} min={0.01} max={1} step={0.001} /> -->
+            <p class="pb-2 text-3xl text-gray-300">Controls</p>
+            <hr>
+            <label for="anim-speed-slider" class="pt-5 block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">Animation speed</label>
+            <input bind:value={animSpeed} id="anim-speed-slider" type="range" min="0" max="1" step="0.001" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+
+            <label for="camera-zoom-slider" class="pt-5 block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">Camera zoom level</label>
+            <input bind:value={cameraZoom} id="camera-zoom-slider" type="range" min="0" max="1" step="0.001" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+
+            <label for="cylinder-slider" class="pt-5 block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">Cylinder length</label>
+            <input bind:value={cylinderLength} id="cylinder-slider" type="range" min="0.01" max="1" step="0.001" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
         </div>
         
     </div>
@@ -48,7 +57,6 @@ import Slider from '@smui/slider';
 <style>
     #demo-interactive {
         width: 100%;
-        max-width: 1200px;
         border-radius: 50px;
         overflow: hidden;
 
@@ -58,7 +66,6 @@ import Slider from '@smui/slider';
     #demo-controls {
         float: right;
         width: 30%;
-        text-align: center;
         font-family: 'Cascadia Code';
         color: darkgray;
     }

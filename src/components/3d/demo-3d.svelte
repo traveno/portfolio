@@ -4,10 +4,6 @@
     import Scene from './scene.svelte';
     import OverlayScene from './overlay-scene.svelte';
     import { delay } from '../util';
-    import Snackbar, { Actions, Label } from '@smui/snackbar';
-    import Button from '@smui/button';
-
-    
 
     /**
     * @type {number}
@@ -102,32 +98,22 @@
 
 <div class="demo-container" bind:clientWidth={containerWidth} bind:clientHeight={containerHeight}>
     <div id="primary-scene">
-        <Canvas size={{ width: containerWidth, height: containerWidth * 0.75 }}>
+        <Canvas size={{ width: containerWidth, height: containerWidth * 0.5 }}>
             <Scene bind:this={primaryScene} />
         </Canvas>
     </div>
     <div id="overlay-scene">
-        <Canvas size={{ width: containerWidth, height: containerWidth * 0.75 }}>
+        <Canvas size={{ width: containerWidth, height: containerWidth * 0.5 }}>
             <OverlayScene bind:this={overlayScene} on:loaded={runDemoSequence} />
         </Canvas>
     </div>
-    <Snackbar variant="stacked" bind:this={demoSnackbar} on:SMUISnackbar:closed={handleClosedSnackbar} timeoutMs={-1}>
-        <Label>Continue this demonstration?</Label>
-        <Actions>
-            <Button>Yes!</Button>
-        </Actions>
-    </Snackbar>
 </div>
 
 
 
-<style type="text/scss">
-    @use 'smui-theme';
-    @use '@material/elevation/mdc-elevation';
-
+<style>
     .demo-container {
         width: 100%;
-        max-width: 1200px;
         display: grid;
         border-radius: 50px;
         overflow: hidden;
