@@ -1,35 +1,109 @@
 <script>
-    import Nav from '../components/nav.svelte';
-    import Drawer, { AppContent, Content } from '@smui/drawer';
-    import List, { Item, Text } from '@smui/list';
+import TopAppBar, { Row, Section } from '@smui/top-app-bar';
+import Paper from '@smui/paper';
+import IconButton from '@smui/icon-button';
+import Drawer, {
+    AppContent,
+    Content,
+    Header,
+    Title,
+    Subtitle,
+} from '@smui/drawer';
+import List, { Item, Text, Graphic } from '@smui/list';
    
-    let clicked = 'nothing yet';
+    let open = false;
+
+    /**
+    * @type {number}
+    */
+    let clientWidth;
+
+    $: {
+        if (clientWidth > 768)
+            open = true;
+        else 
+            open = false;
+    }
 </script>
+
+<svelte:window bind:innerWidth={clientWidth} />
+
+<TopAppBar
+    variant="static"
+    color={'secondary'}
+    >
+    <Row>
+        <Section>
+        <IconButton class="material-icons" on:click={() => open = !open}>menu</IconButton>
+        </Section>
+        <Section align="end" toolbar>
+        <IconButton class="material-icons" aria-label="Download"
+            >file_download</IconButton
+        >
+        <IconButton class="material-icons" aria-label="Print this page"
+            >print</IconButton
+        >
+        <IconButton class="material-icons" aria-label="Bookmark this page"
+            >bookmark</IconButton
+        >
+        </Section>
+    </Row>
+</TopAppBar>
 
 
 <div class="drawer-container">
-    <div class="drawer">
-        <Drawer>
-            <Content>
-                <List>
-                    <Item
-                        href="/"
-                    >
-                        <Text>front page</Text>
-                    </Item>
-                    <Item
-                        href="/about"
-                    >
-                        <Text>my mission</Text>
-                    </Item>
-                </List>
-            </Content>
-        </Drawer>
-    </div>
-    
+    <Drawer variant="dismissible" bind:open>
+        <!-- <Header>
+            <Title>stephen fike</Title>
+            <Subtitle>yep it's me</Subtitle>
+        </Header> -->
+        <Content>
+            <List>
+                <Item
+                    href="/"
+                >
+                    <Graphic class="material-icons" aria-hidden="true">home</Graphic>
+                    <Text>front page</Text>
+                </Item>
+                <Item
+                    href="/about"
+                >
+                    <Graphic class="material-icons" aria-hidden="true">rocket_launch</Graphic>
+                    <Text>my mission</Text>
+                </Item>
+                <Item
+                    href="/about"
+                >
+                    <Graphic class="material-icons" aria-hidden="true">extension</Graphic>
+                    <Text>projects</Text>
+                </Item>
+                <Item
+                    href="/about"
+                >
+                    <Graphic class="material-icons" aria-hidden="true">mood</Graphic>
+                    <Text>experience</Text>
+                </Item>
+                <Item
+                    href="/about"
+                >
+                    <Graphic class="material-icons" aria-hidden="true">mail</Graphic>
+                    <Text>communications</Text>
+                </Item>
+            </List>
+        </Content>
+    </Drawer>
     <AppContent class="app-content">
         <main class="main-content">
-            <slot></slot>
+                <Paper>
+                    <Title>Test paper page</Title>
+                    <Content>
+                        <div class="main-content-center">
+                            <slot></slot>
+                        </div>
+                    </Content>
+                
+                </Paper>
+            
             <footer>Copyright 2022 Stephen Fike</footer>
         </main>
     </AppContent>
@@ -43,18 +117,9 @@
     /* These classes are only needed because the
       drawer is in a container on the page. */
     .drawer-container {
-        position: fixed;
-        display: flex;
-        height: 100%;
-        width: 100%;
-    }
-
-    .drawer {
         position: relative;
-        text-align: center;
+        display: flex;
     }
-
-
    
     * :global(.app-content) {
         flex: auto;
@@ -65,13 +130,18 @@
    
     .main-content {
         overflow: auto;
-        padding: 16px;
-        padding-left: 32px;
+        padding: 16px 32px 16px 32px;
         box-sizing: border-box;
+        max-width: 1500px;
+    }
+
+    .main-content-center {
+        margin-left: auto;
+        margin-right: auto;
     }
 
     :global(body) {
-        position: fixed;
+        position: relative;
         width: 100%;
         height: 100%;
         margin: 0;
@@ -80,7 +150,7 @@
     #social-icons {
         position: fixed;
         bottom: 15px;
-        left: 15px;
+        right: 25px;
     }
 
     #social-icons > svg {
